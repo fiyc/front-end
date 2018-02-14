@@ -1,0 +1,126 @@
+参考资料: 《鸟哥的Linux私房菜》P294
+<h4>变量的设置规则</h4>
+<pre>
+1. 变量与变量内容以一个等号"="来连接
+	[yifei@localhost]#myname=yifei
+	
+2. 等号两边不能直接接空格，如下错误:
+	[yifei@localhost]#maname = yifei
+	
+3. 变量名只能是英文字母与数字，且数字不能作为开头，如下错误:
+	[yifei@localhost]#2myname=yifei
+	
+4. 双引号内的特殊字符可以保留原有的特性
+	[yifei@localhost]#var="lang is $LANG"
+	[yifei@localhost]#echo $var
+	[yifei@localhost]#lang is en_US
+	
+5. 单引号内的特殊字符仅为一般字符(纯文本)
+	[yifei@localhost]#var='lang is $LANG'
+	[yifei@localhost]#echo $var
+	[yifei@localhost]#lang is $LANG
+	
+6. 可用转义字符"\"将特殊符号变为一般字符
+	
+7. 可使用反单引号(键盘1左边的按键)或者$(命令)来通过其他的命令提供信息
+	[yifei@localhost]#version=$(uname -r)
+	[yifei@localhost]#version=`uname -r`
+	
+8. 增加变量内容
+	[yifei@localhost]#PATH="$PATH":/home/bin
+	[yifei@localhost]#PATH=${PATH}:/home/bin
+	
+9. 使变量变成环境变量
+	[yifei@localhost]#export PATH
+</pre>
+<h4>变量键盘读取、数组与声明</h4>
+<pre>
+1. read [-pt] variable
+	-p: 后面接提示符
+	-t: 后面接收超时时间，秒
+	[yifei@localhost]# read -p "Please enter a number" -t 10 num
+
+2. declare [-aixr] variable
+	-a: 声明一个数组
+	-i: 声明一个int类型
+	-x: 声明一个环境变量
+	-r: 声明一个只读变量
+
+3. 数组的使用
+	[yifei@localhost]#declare -a array
+	[yifei@localhost]#array[1]="hello"
+	[yifei@localhost]#array[2]="world"
+	[yifei@localhost]#array[3]="I\'m yifei"
+	[yifei@localhost]#echo "${array[1]} ${array[2]}, ${array[3]}"
+	
+</pre>
+<h4>变量内容的删除、替代和替换</h4>
+<pre>
+1. 删除与替换
+	${var#key}: 若变量内容从头开始的数据符合"关键字", 则将符合的最短数据删除
+	${var##key}: 若变量内容从头开始的数据符合"关键字", 则将符合的最长数据删除
+	${var%key}: 若变量内容从尾向前的数据符合"关键字", 则将符合的最短数据删除
+	${var%%key}: 若变量内容从尾向前的数据符合"关键字", 则将符合的最长数据删除
+	${var/oldstr/newstr}: 若变量内容符合"旧字符串", 则第一个旧字符串会被新字符串替换
+	${var//oldstr/newstr}: 若变量内容符合"旧字符串", 则所有旧字符串会被新字符串替换
+</pre>
+
+<h4>系统环境配置文件读取(鸟哥的Linux私房菜P320)</h4>
+
+<h4>数据流重定向</h4>
+<pre>
+	覆盖内容(正确信息)
+	[yifei@localhost]#ll -a > Documents/log
+	追加内容(正确信息)
+	[yifei@localhost]#ll -a >> Documents/log
+	覆盖内容(错误信息)
+	[yifei@localhost]#ll -a 2> Documents/log
+	追加内容(错误信息)
+	[yifei@localhost]#ll -a 2>> Documents/log
+	正确错误信息同时写入同一文件
+	[yifei@localhost]#ll -a 2>&1 Documents/log
+	[yifei@localhost]#ll -a &> Documents/log
+	
+</pre>
+<h4>pipe</h4>
+<pre>
+Today my X-window is out of work, so I must to work with english.
+Oh no, I don't like make B!!!
+	1. cut
+	-d: followed by splite character, used with -f together.
+	-f: followed by the index of the array get by -d.
+	-c: use the index of characters to splite the line. 
+	[yifei@localhost]#echo $PATH | cut -d ':' -f 3
+	[yifei@localhost]#echo $PATH | cut -c 12-20 (it would show the content between 12th and 20th)
+
+Sorroy for my pool english, I found this is so difficult to describe what I learn by english.
+So this part is in <Brother Bird's Linux> P334.
+And later I would rewrite this part if have time. ^-^.
+</pre>
+	[yifei@localhost]#
+<h4>字符转换命令tr, col, join, paste, expand</h4>	
+<pre>
+内容太多， 见《鸟哥的Linux私房菜》P338
+</pre>
+
+<h4>正则表达式</h4>	
+<pre>
+1. 解决不同语系导致的编码不同问题，特殊符号
+[:alnum:] 代表英文大小写字符及数字，即0-9,A-Z,a-z
+[:alpha:] 代表英文大小写字符，即a-z,A-Z
+[:blank:] 代表空格符与[Tab]
+[:cntrl:] 代表键盘上的控制按键，例如CR,LF,Tab,Del等
+[:digit:] 代表数字，即0-9
+[:graph:] 除了空格符（空格键与[Tab]）外的其他按键
+[:lower:] 代表小写字符，即a-z
+[:print:] 代表任何可以被打印出来的字符
+[:punct:] 代表标点符号，即"'?!;:#$等
+[:upper:] 代表大写字符，即A-Z
+[:space:] 任何会产生空白的字符，包括空格键[Tab] CR 等
+[:xdigit:] 代表十六进制的数字类型，因此包括0-9，A-F，a-f
+
+2. grep [-A] [-B] [--color=auto] '搜寻字符串' filename
+-A: 后面可加数字，为after的意思，除了列出该行外，后续的n行也列出来
+-B: 后面可加数字，为befer的意思，除了列出该行外，前面的n行也列出来
+
+</pre>

@@ -1,0 +1,74 @@
+body{
+	background-color: #f5f5f5;
+}
+.header{
+	margin: 10px
+}
+
+.body{
+	margin: 10px;
+	width : 960px;
+}
+
+.body .detail{
+	margin: 20px;
+	background-color: white;
+	box-shadow: 0px 1px 7px #BCBCBC;
+	min-width: 800px;
+	min-height: 400px;
+	border-radius: 4px;
+}
+
+.regularBody{
+	padding-top:40px;
+}
+
+.regularBody .blackPart{
+	min-height: 320px;
+	background-color: #f5f5f5;
+	padding: 30px;
+}
+
+.regularBody .blackPart textarea{
+	width: 800px;
+	line-height: 1;
+	box-shadow: 0px 1px 7px #BCBCBC;
+	border-color: white;
+}
+
+.markdown_body{
+	padding: 10px;
+}
+.markdown_Edit{
+	margin: 0px;
+	background-color: white;
+	box-shadow: 0px 1px 7px #BCBCBC;
+	width: 49%;
+	min-height: 800px;
+	border-radius: 4px;
+}
+
+.markdown_Edit textarea{
+	background:transparent;
+	border-style:none; 
+	width:100%;
+	min-height: 800px;
+	resize:none;
+	outline:none;
+	overflow-y:hidden;
+	overflow-x;
+}
+
+
+
+.markdown_Show{
+	margin: 0px;
+	padding: 10px;
+	background-color: white;
+	box-shadow: 0px 1px 7px #BCBCBC;
+	width: 49%;
+	min-height: 800px;
+	border-radius: 4px;
+}
+
+

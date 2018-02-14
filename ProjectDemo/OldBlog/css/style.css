@@ -1,0 +1,67 @@
+body{
+	font-family:STFangSong, Helvetica, Arial, Vernada, Tahoma, STXihei, "Microsoft YaHei", "Songti SC", SimSun, Heiti, sans-serif;
+}
+.title{
+	color: gray;
+}
+.title p{
+	padding: 10px 0 0 20px;
+	font-size:20px;
+}
+.title p #status{
+	padding-left: 20px;
+	font-size: 11px;
+}
+.title #time{
+	font-size:15px;	
+}
+.title hr{
+	margin: 0;
+	padding: 0;
+}
+.menu{
+	width: 250px;
+	padding: 10px;
+	border: 1px solid rgb(221,221,221);
+	border-radius:10px;
+	margin: 10px 0 0 10px;
+	float:left;
+}
+
+.menu-level-1{
+	margin:10px;
+}
+.menu-level-2{
+	margin-left:20px;
+}
+
+.menu dt{
+	margin-top: 10px;
+}
+.content{
+	width:1000px;
+	margin:20px 0 0 500px;
+	padding-left: 20px;
+}
+
+.content pre{
+	clear:both;
+	margin-top: 0;
+}
+
+.title_name{
+	font-size: 28px;
+}
+
+.title_open{
+	font-size: 15px;
+	margin-left: 40px;
+}
+.note-place{
+	padding:10px;
+}
+.fooder{
+	position: fixed;
+	left: 20px;
+	bottom: 20px;	
+}

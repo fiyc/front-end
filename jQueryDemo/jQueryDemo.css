@@ -1,0 +1,10 @@
+div, span{
+    width: 140px;
+    height: 140px;
+    background-color: #aaa;
+    float: left;
+    margin: 5px;
+    border: black 1px solid;
+}
+
+

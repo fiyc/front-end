@@ -1,0 +1,327 @@
+<h4>Linux 装机预备</h4>
+<pre>
+1. 安装Flash插件
+	32位
+	rpm -ivh http://linuxdownload.adobe.com/adobe-release/adobe-release-i386-1.0-1.noarch.rpm;rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux;yum update;yum install flash-plugin
+	64位
+	cd /tmpwget;yum install wget http://download.macromedia.com/pub/labs/flashplayer10/flashplayer10_2_p3_64bit_linux_111710.tar.gz;tar -xzvf flashplayer10_2_p3_64bit_linux_111710.tar.gz;
+
+</pre>
+<h4>Github搭建和应用</h4>
+<a href="http://www.linuxeden.com/html/develop/20131219/146589.html
+">参考地址</a> 
+<pre>
+1. 安装Git客户端
+	#yum install git
+2. 配置Git
+	2.1 创建本地ssh key
+		#ssh-keygen -t rsa -C "注册邮箱"
+	2.2 检测配置是否成功
+		#ssh -T git@github.com
+	2.3 添加远程地址
+		#git init
+		#git remote add origin git@github.com:yourName/yourRepo.git
+3. 提交、上传代码
+	#git add yourfile
+	#git commit -m "this is comments"
+	#git push origin master / git pull => git push --force origin master
+4. 下载代码
+	#git clone http://github.com/....
+	4.1 更新代码
+		#git pull origin master
+</pre>
+
+<h4>压缩与解压缩</h4>	
+<pre>
+例子：	zip -r myfile.zip ./*
+说明： 将当前目录下的所有文件和文件夹全部压缩成myfile.zip, -r 表示递归压缩子目录下的文件。	
+
+例子： unzip -o -d /home/sunny myfile.zip
+说明： 把myfile.zip 文件解压到/home/sunny/
+		-o: 不提示的情况下覆盖文件；
+		-d: -d /home/sunny 指明将文件解压缩到/home/sunny目录
+tar: 解压缩 [verycoder@localhost ~]$ tar -xf filename 
+==========================================================
+1. gzip
+	语法: gzip [-cdtv#] 文件名
+	-c: 将压缩的数据传输到屏幕，可通过数据流重定向处理
+	-d: 解压缩
+	-t: 可以用来检验一个压缩文件的一致性，查看文件有无错误
+	-v: 可以显示原文件/压缩文件的压缩比等信息
+	-#: 压缩等级，-1最快，但是压缩比最差，-9最慢，默认是-6
+2. bzip2
+	语法: bzip2 [-cdkzv#] 文件名
+	-c: 将压缩的数据传输到屏幕
+	-d: 解压缩
+	-k: 保留原文件
+	-z: 压缩
+	-v:  可以显示原文件/压缩文件的压缩比等信息
+	-#: 压缩等级，-1最快，但是压缩比最差，-9最慢，默认是-6
+3. tar
+	范例: tar [-j|-z] [cv] [-f 新建的文件名] filename.. <== 打包与压缩
+	      tar [-j|-z] [tv] [-f 新建的文件名] <== 查看文件名
+		  tar [-j|-z] [xv] [-f 新建的文件名] [-C 目录] <==解压缩
+	-c: 新建打包文件，可搭配-v来查看过程中被打包的文件名
+	-t: 查看打包文件的内容含有哪些文件名，重点在查看文件名
+	-x: 解打包或解压缩的功能，可以搭配-C在特点目录解开。
+		-c -t -x 不可同时使用
+	-j: 通过bzip2的支持进行压缩/解压缩，此时文件名最好为*.tar.bz2
+	-z: 通过gizp的支持进行压缩/解压缩，此时文件名最好为*.tar.gz
+	-f filename: 后面接一个被处理的文件名
+	-C 目录: 这个参数用在解压缩时，若要在特定目录解压缩，可以使用
+</pre>
+
+<h4>Vim</h4>
+<pre>
+1. 窗口切换
+	:tabnew 新tab
+	:tabc 关闭当前tab
+	:tabo 关闭其他所有tab
+	:tabs 查看所有打开的tab
+	:tabp / gt 前一个
+	:tabn / gT 后一个
+	
+2. 窗口调整
+	纵向
+	：res num 显示行数为num
+	 :res+num 显示行数+num
+	 :res-num 显示行数-num
+
+	 横向
+	 :vertical res num 指定num列
+	 :vertical res+num 增加num列
+	 :vertical res-num 减少num列
+</pre>
+
+<h4>中文man</h4>
+<a href="http://www.cnblogs.com/chengmo/archive/2010/10/27/1862553.html">教程1</a>
+<h4>2015.3.31</h4>
+<pre>
+1. 显示语言
+[verycoder@localhost ~]$ echo $LANG
+2. 显示时间
+[verycoder@localhost ~]$ date
+[verycoder@localhost ~]$ date +%Y/%m/%d
+3. 日历
+cal 语法: cal [[month] year]
+[verycoder@localhost ~]$ cal
+[verycoder@localhost ~]$ cal 2009
+[verycoder@localhost ~]$ cal 10 2009
+4. 计算器
+[verycoder@localhost ~]$ bc
+	设置小数点后3位: scale=3
+</pre>
+
+<h4>2015.4.2</h4>
+<pre>
+1. 文件属性
+drwxr-xr-x. 3 verycoder verycoder 4096 Mar 31 23:51 Downloads
+[权限][连接][所有者][用户组][文件容量][修改日期][文件名]
+[d] 目录
+[-] 文件
+[l] 连接文件
+[b] 设备文件里面的可供存储的接口设备
+[c] 设备文件里面的串行端口设备，例如键盘，鼠标
+2. 改变文件属性和权限
+	chgrp: 改变文件所属用户组
+	chown: 改变文件所有者
+	chmod: 改变文件的权限
+</pre>
+
+<h4>2015.4.7</h4>
+<pre>
+1. 目录显示
+	pwd
+	显示真实地址 pwd -P
+2. 建立目录
+	递归建立: mkdir -p test/test1/test2
+	设置权限: mkdir -m 711 test
+3. 环境变量
+	echo $PATH
+3. cp命令
+	语法: cp [-adfilprsu] 源文件 目标文件
+	-a: 相当于-pdr
+	-p: 连同文件的属性一起复制，而非默认属性
+	-d: 若源文件为link file, 复制连接文件而非文件本身
+	-r: 递归复制， 用于目录文件复制
+	-f: 强制， 若目标文件已经存在， 删除后重试
+	-i: 若目标文件已经存在， 给与提示
+	-l: 进行硬连接的连接文件
+	-s: 进行符号连接的链接文件(快捷方式)
+	-u: 当目标文件比源文件旧才更新
+	ps: 如果源文件有2个以上， 则目标文件需要是目录
+4. touch 命令(修改文件时间或者创建新文件)	
+	mtime: 当文件内容被修改时
+	ctime: 当文件状态被修改时
+	atime: 当文件被使用时
+	语法: touch [-acdmt] 文件
+	-a: 仅修改访问时间
+	-c: 仅修改时间，若文件不存在不会创建新文件 
+	-d: 后面可以跟日期，而不是当前日期， 也可以使用 --date="日期或时间"
+	-m: 仅修改mtime
+	-t: 后面可以跟日期，而不是当前日期
+</pre>
+<h4>2015.4.8</h4>
+<pre>
+1. 文件默认权限: umask
+	[yifei@localhost ~]$ umask
+	0002
+	ps: 数字说明被减掉的权限
+	修改默认权限: 
+	[yifei@localhost ~]$ umask 002
+2. 文件隐藏属性: chattr
+	语法: chattr [+-=] [ASacdistu] 文件或目录
+	A: 当有访问此文件时， 不会修改atime(对于I/O较慢的机器有帮助)
+	S: 由异步写如磁盘变为同步
+	a: 只能增加数据，而不能删除也不能修改数据
+	c: 自动压缩文件，读取时解压缩，存时先保存再压缩
+	d: 当dump程序被执行时，使文件(目录)不会被dump备份
+	i: 无法删除，改名，设置连接，写入和添加数据
+	s: 当删除时，完全从硬盘删除
+	u: 与s相反，删除后数据仍存在于硬盘
+3. 查看隐藏属性: lsattr
+</pre>
+	
+<h4>2015.4.10</h4>
+<pre>
+1. 查看文件类型: file
+2. 命令与文件的查询
+	2-1. which(寻找‘'执行文件')
+	语法: which [-a] command	
+	-a: 将所有有PATH目录中可以找到的命令均列出，而不是只是第一个
+	2-2. whereis(寻找特定文件)
+	语法: whereis [-bmsu] 文件或目录
+	-b: 只找二进制的文件
+	-m: 只找在manual 路径下的文件
+	-s: 只找source源文件
+	-u: 查找不在上述三种选项当中的其他特殊文件
+	2-3. locate(寻找特定文件)
+	语法: locate [-ir] keyword
+	-i: 忽略大小写
+	-r: 后面可接正则表达式
+	2-4. find
+	语法: find [PATH] [option] [action]
+	option: 
+			时间方面
+			-atime
+			-ctime ==> (+3 所有四天前, 3 四天前那一天, -3 四天内所有)
+			-mtime
+			
+
+			用户与用户组
+			-uid n
+			-gid n
+			-user name
+			-group name
+			-nouser: 寻找文件的所有者不存在 /etc/passwd的人
+			-nogroup: 寻找文件的所有用户组不存在于 /etc/group的文件
+
+			文件权限与文件名
+			-name filename
+			-size [+-] SIZE: 查找比SIZE 大(+)或小(-)的文件，规格c: byte, k: kb 
+			-type TYPE
+			-perm mode: 查找文件权限"刚好等于model" 的文件
+			-perm -mode
+			-perm +mode
+
+			其他操作
+			-exec command: command为其他命令, 用来处理查找到的结果, 例子: find / -perm +7000 -exec ls -l {}\;
+
+</pre>
+<h4>2015.4.13</h4>
+<pre>
+1. 磁盘与目录的容量: df, du
+	语法: df [-ahikHTm] [目录或文件名]
+	-a: 列出所有的文件系统
+	-h: 以较易读懂的大小格式显示
+	-i: 不用硬盘容量，而以inode的数量来显示
+	-k: 以KB来显示容量
+	-H: 以M=1000k替代M=1024K
+	-T: 连同该分区的文件系统名称(例如ext3) 也列出
+	-m: 以MB来显示容量
+2. 连接命令： ln
+	语法: ln [-sh] 源文件 目标文件
+	-s: 如果不加任何参数进行连接，那就是hard link, s 为 symbolic link
+	-f: 如果目标文件存在时， 则主动将目标文件直接删除后再创建
+3. 磁盘的分区、格式化、检验与挂载
+	见《鸟哥的linux私房菜》P217
+4. 创建大型文件(作为分区使用..)
+	dd if=/dev/zero of=/home/loopdev bs=1M count=512
+	mkfs -t ext3 /home/loopdev
+5. 内存交换空间的构建
+	见《鸟哥的linux私房菜》P238
+	
+</pre>
+<h4>2015.4.14</h4>
+<pre>
+1. 完整备份工具: dump
+	见《鸟哥的linux私房菜》P238
+</pre>
+<h4>Linxu 帐号与用户组</h4>
+<pre>
+1. 用户帐号 /etc/passwd
+verycoder:x:1000:1000:Verycoder:/home/verycoder:/bin/bash
+账户名:密码:UID:GID:用户信息说明:主文件夹:bash
+2. 用户组 /etc/group
+wheel:x:10:verycoder
+用户组名:密码:GID:包含的用户
+3. 查看用户组 []# groups
+4. 切换用户组 []# newgrp
+5. 新建账户
+	[]# useradd [-u UID] [-g 初始用户组] [-G 次要用户组] [-mM] [-c 说明栏] [-d 主文件夹] [-s shell] 用户帐号名
+	-u: 后接UID，数字，指定一个特定的UID
+	-m: 强制创建用户主文件夹(一般账户默认值)
+	-M: 强制不创建用户主文件夹(系统账户默认)
+	-c: /etc/passwd 第5列
+	-d:	指定某个文件夹为主文件夹，而不用默认
+	-s: 定义bash，默认为/bin/bash
+6. 更改密码
+	[]# passwd [-l] [-u] [--stdin] [-S] [-n 日数] [-x 日数] [-w 日数] [-i 日期] 帐号
+	--stdin: 可以通过来自前一个管道的数据作为密码输入，对shell script 有帮助
+	-l: Lock，会将/etc/shadow 第二列最前面加上！使密码失效
+	-u: 与-l 相对，是Unlock的意思
+	-S： 列出密码相关参数
+	-n: shadow字段4，多久内不可修改密码参数
+	-x: shadow字段5，多久内必须要修改密码
+	-w: shadow字段6，密码过期前的警告天数
+	-i: shadow字段7，密码失效日期
+7. 修改帐号
+	[]# usermod [-cdegGlsuLU] username
+	用法与新建以及更改密码类似，见《鸟哥的Linux私房菜》 P416
+8. 删除账户
+	[]# userdel [-r] username
+	-r: 连同主文件夹一起删除
+</pre>
+<h4> 2015.5.04 </h4>
+<pre>
+1. 主机的具体权限规划: ACL
+	见《鸟哥的Linux私房菜》P423
+2. add user by ourself
+	see the book P443
+3. something about Quota(no need to learn now)
+	see the book P451
+</pre>
+<h4> 2015.5.07</h4>
+<pre>
+1.  在后台执行程序
+	[]#tar -zpcf /home/document /etc &
+	C+z
+2. 显示后台
+	jobs [-lrs]
+	-l: 除了列出Job number 与命令行之外，同时列出PID
+	-r: 仅列出正在run的程序
+	-s: 仅列出Stop的程序
+3. 将后台工作拿到前台来处理
+	fg %jobnumber
+4. 让工作在后台的状态变成运行中
+	bg %jobnumber
+5. 管理后台中的工作
+	kill -signal %jobnumber
+	kill -l 
+	-l: 列出目前kill能够使用的信号(signal)有哪些
+	-1: 重新读取一次参数的配置文件
+	-2: 代表与键盘输入[crtl] -c 同样的操作
+	-9: 立即强制删除一个工作
+	-15: 以正常的程序方式终止一项工作
+</pre>
+

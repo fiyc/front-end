@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+<title>逸只夜猫</title>
+<meta charset="utf-8"/>
+<!--import css file-->
+<link href="bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet"></link>
+<link href="bootstrap/css/bootstrap.css.map" type="text/css" rel="stylesheet"></link>
+<link href="bootstrap/css/bootstrap-theme.css" type="text/css" rel="stylesheet"></link>
+<link href="bootstrap/css/bootstrap-theme.css.map" type="text/css" rel="stylesheet"></link>
+<link href="css/style.css" type="text/css" rel="stylesheet"></link>
+<!--import js file-->
+<script type="text/javascript" src="scripts/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="scripts/common.js"></script>
+<script type="text/javascript" >
+</script>
+</head>
+
+<body>
+<script>
+	showTime()
+</script>
+<div class="title">
+	<p>逸只夜猫<span id="status"> 专注当前 不忘初心 </span></p>	<p id="time"></p>
+	<hr>
+</div>
+<!--========================================导航栏==========================================-->
+<div class="menu">
+	<dl class="menu-level-1">
+		<dt ><a href="#" onclick="showChile('menu_1')">随手写写</a></dt>
+			<dd class="menu-level-2" hidden="hidden" id="menu_1">
+				<a href="#1">夜深 —— 序</a><br>
+				<a href="#2">2015年3月17 心情大好</a><br>
+				<a href="#3">2015年3月25 Android模型初成总结</a><br>
+				<a href="#5">思绪有点乱</a><br>
+				<a href="#8">离开 新的开始</a>
+			</dd>
+
+		<dt ><a href="#" onclick="showChile('menu_2')">技术笔记</a></dt>
+			<dd class="menu-level-2" hidden="hidden" id="menu_2">
+				<a href="#4">每天一点Linux</a><br>
+				<a href="#6">Shell Script</a>
+			</dd>
+		
+		<dt ><a href="#" onclick="showChile('menu_3')">Show Time</a></dt>
+			<dd class="menu-level-2" hidden="hidden" id="menu_3">
+				<a href="mywork/stupidball.html">仿Flappy Bird</a>
+			</dd>
+
+		<dt ><a href="#" onclick="showChile('menu_4')">帆云复语</a></dt>
+			<dd class="menu-level-2" hidden="hidden" id="menu_4">
+				<a href="#7">1. 彷徨</a>
+			</dd>
+	</dl>
+</div>
+
+<!--========================================内容栏==========================================-->
+<div class="content" id="content">
+	<fieldset id="8">
+		<legend>
+			<p>离开 新的开始<a class="title_open" href="#8" onclick="openDetail(this, 'document/7.txt')">展开</a></p>
+		</legend>
+		<div hidden="hidden"></div>
+	</fieldset>
+	<fieldset id="7">
+		<legend>
+			<p>彷徨（杨胖子出品）<a class="title_open" href="#7" onclick="openDetail(this, 'document/yang1.txt', 'music/YoungForYou.mp3')">展开</a></p>
+		</legend>
+		<div hidden="hidden"></div>
+	</fieldset>
+	<fieldset id="6">
+		<legend>
+			<p>Shell Script<a class="title_open" href="#6" onclick="openDetail(this, 'document/6.txt', 'music/YoungForYou.mp3')">展开</a></p>
+		</legend>
+		<div hidden="hidden"></div>
+	</fieldset>
+	<fieldset id="5">
+		<legend>
+			<p>思绪有点乱<a class="title_open" href="#5" onclick="openDetail(this, 'document/5.txt', 'music/YoungForYou.mp3')">展开</a></p>
+		</legend>
+		<div hidden="hidden"></div>
+	</fieldset>
+	<fieldset id="4">
+		<legend>
+			<p>每天一点Linux<a class="title_open" href="#4" onclick="openDetail(this, 'document/4.txt', 'music/YoungForYou.mp3')">展开</a></p>
+		</legend>
+		<div hidden="hidden"></div>
+	</fieldset>
+
+	<fieldset id="3">
+		<legend>
+			<p>2015年3月25 Android模型初成总结<a class="title_open" href="#3" onclick="openDetail(this, 'document/3.txt', 'music/warriorsong.mp3')">展开</a></p>
+		</legend>
+		<div hidden="hidden"></div>
+	</fieldset>
+
+	<fieldset id="2">
+		<legend>
+			<p>2015年3月17 心情大好<a class="title_open" href="#2" onclick="openDetail(this, 'document/2.txt', 'music/warriorsong.mp3')">展开</a></p>
+		</legend>
+		<div hidden="hidden"></div>
+	</fieldset>
+
+	<fieldset id="1">
+		<legend>
+			<p>夜深 —— 序<a class="title_open" href="#1" onclick="openDetail(this, 'document/1.txt', 'music/1.mp3')">展开</a></p>
+		</legend>
+		<div hidden="hidden"></div>
+	</fieldset>
+</div>
+<div class="fooder">
+	<a href="#" onclick="closeAll()"> 收起全部</a>
+</div>
+<!--======================================Example=============
+			<div class="note-place">
+				<h3>Example</h3>
+				<pre>
+				
+				</pre>	
+			</div>
+			<div class="note-place" id="android_1">
+				<h3>打飞机游戏</h3>
+				<pre>
+				
+				</pre>	
+			</div>
+==================================-->
+<div id="music">
+	<EMBED src="music/YoungForYou.mp3" width=0 height=0 volume=70 autostart=true loop=5 style="background:white"></EMBED>
+</div>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e4a5415b1c13dc395a1785541dd8dc28";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</body>
+</html>

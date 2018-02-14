@@ -1,0 +1,52 @@
+<html>
+<head>
+    <link href="CommonResource/bootstrap3/css/bootstrap.css" type="text/css" rel="stylesheet"></link>
+    <script src="CommonResource/jquery-1.9.1.js"></script>
+    <script src="CommonResource/core-min.js"></script>
+    <script src="CommonResource/jsencrypt.min.js"></script>
+    <script src="CommonResource/tripledes.js"></script>
+    <script src="CommonResource/mode-ecb.js"></script>
+</head>
+<bdoy>
+<h1>RSA 加密</h1>
+<textarea id="inputText"></textarea><br><br>
+<textarea id="outputText"></textarea><br>
+<button id="do">加密</button>
+
+<h1>DES 加密</h1>
+<textarea id="desinputText"></textarea><br><br>
+<input id="desKey" type="text" placeholder="key"/><br><br>
+<textarea id="desoutputText"></textarea><br>
+<button id="desdo">加密</button>
+
+<script type="text/javascript">
+var publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCTGabw0E4EJ5ZKGy0Xg6CoXIzMdYJ0+wyfI9A4anPqPgk3EIipqh1dmGun/qgeinGzhoG/VIxBF6Tq3uW7WlPMdiS27oMQoVHKzqd/W6wQxysSnTPJD22UtPEhzdHcwbEX4eyc46o1jid8LOr3Fu7QnL7HW1+i8HWCNrMoHVLcUQIDAQAB";
+	$(function(){
+		$("#do").click(function(){
+			var input = $("#inputText").val();
+			var encrypt = new JSEncrypt();
+			encrypt.setPublicKey(publicKey);
+			var output = encrypt.encrypt(input);
+			$("#outputText").val(output);
+		});
+
+		$("#desdo").click(function(){
+			var input = $("#desinputText").val();
+			var key = $("#desKey").val();
+
+			debugger;
+			var keyHex = CryptoJS.enc.Utf8.parse(key);
+			var encrypted = CryptoJS.DES.encrypt(input, keyHex, {
+		        mode: CryptoJS.mode.ECB,
+		        padding: CryptoJS.pad.Pkcs7
+		    });
+
+			var output = encrypted.toString();
+			$("#desoutputText").val(output);
+		});
+	});
+</script>
+</bdoy>
+</html>
+
+

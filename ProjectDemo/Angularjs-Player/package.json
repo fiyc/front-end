@@ -1,0 +1,18 @@
+{
+  "name": "Angularjs-Player",
+  "version": "1.0.0",
+  "description": "h5和c3实现的音乐播放器",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@coding.net:useLess/Angularjs-Player.git"
+  },
+  "author": "useLess",
+  "license": "ISC",
+  "devDependencies": {
+    "module": "0.0.1"
+  }
+}
