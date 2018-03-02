@@ -1,0 +1,145 @@
+<html>
+<head>
+<title>ES6 Destructuring</title>
+<meta charset="UTF-8" />
+<meta name="Author" content="fiyc" />
+<meta name="Description" content="" />
+
+</head>
+<body>
+<script type="text/javascript">
+	// 简单数组解构	
+	function demo1(){
+		let [a, b, c] = [1, 2, 3];
+		console.log(a);
+		console.log(b);
+		console.log(c);
+	}
+
+
+	// 下面是一些使用嵌套数组进行解构的例子。
+	function demo2(){
+		let [foo, [bar, baz]] = ['foo', ['bar', 'baz']];
+		console.log(foo);
+		console.log(bar);
+		console.log(baz);
+
+		let [ , , third] = [1, 2, 3];
+		console.log(third);
+
+		let [x, , y] = [1, 2, 3];
+		console.log(x);
+		console.log(y);
+
+		let [head, ...tail] = [1, 2, 3, 4];
+		console.log(head);
+		console.log(tail);
+
+		let [first, second, ...other] = ['a'];
+		console.log(first);
+		console.log(second);
+		console.log(other);
+	}
+
+	// 如果解构不成功，变量的值就等于undefined。
+	function demo3(){
+		let [foo1] = [];
+		let [bar, foo2] = ['a'];
+		console.log(foo1);
+		console.log(foo2);
+	}
+
+	// 不完全解构
+	function demo4(){
+		let [x, y] = [1, 2, 3, 4];
+		let [a, [b], c] = ['a', ['b', 'd'], 'c'];
+		console.log(x);
+		console.log(y);
+		console.log(a);
+		console.log(b);
+		console.log(c);
+	}
+
+	// 如果等号的右边不是可遍历的结构，那么将会报错。
+	function demo5(){
+		let [foo] = 1;
+		let [foo1] = false;
+		let [foo2] = undefined;
+		let [foo3] = NaN;
+		let [foo4] = null;
+		let [foo5] = {};
+	}
+
+	// 解构赋值允许指定默认值。
+	function demo6(){
+		let [foo = 'foo'] = [];
+		console.log(foo);
+	}
+
+	// 所以，只有当一个数组成员严格等于undefined，默认值才会生效。
+	function demo7(){
+		let [foo = 'foo'] = [null];
+		console.log(foo);
+	}
+
+	// 解构不仅可以用于数组，还可以用于对象。
+	function demo8(){
+		let {foo} = {foo:123};
+		console.log(foo);
+	}
+
+	// 变量必须与属性同名，才能取到正确的值。
+	function demo9(){
+		let {bar, foo} = {bar: 'bar', foo: 'foo'};
+		let {baz} = {bar: 'bar', foo: 'foo'};
+		console.log(bar, foo, baz);
+	}
+
+	// 如果变量名与属性名不一致，必须写成下面这样。
+	function demo10(){
+		let {foo: baz} = {foo:'123'};
+		console.log(baz);
+	}
+
+	// 嵌套赋值
+	function demo11(){
+		let obj = {
+			  p: [
+			    'Hello',
+			    { y: 'World' }
+			  ]
+		};
+
+		let { p, p: [x, { y }] } = obj;
+		console.log(p, x, y);
+	}
+
+	// 字符串也可以解构赋值
+	function demo12(){
+		let [a, b, c, d] = "hello";
+		console.log(a, b, c, d);
+	}
+
+	// 解构赋值时，如果等号右边是数值和布尔值，则会先转为对象。
+	function demo13(){
+		let {toString: a} = true;
+		let {toString: b} = 123;
+		console.log(a, b);
+	}
+
+	// 函数的参数也可以使用解构赋值
+	function demo14(){
+		let fun = ([x, y]) => {
+			return x + y;
+		};
+
+		let a = fun([1, 2]);	
+		console.log(a);
+	}
+	demo14();
+
+
+</script>
+</body>
+</html>
+	
