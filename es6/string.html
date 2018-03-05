@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>ES6 String </title>
+<meta charset="UTF-8" />
+<meta name="Author" content="fiyc" />
+<meta name="Description" content="" />
+<script type="text/javascript">
+// JavaScript 允许采用\uxxxx形式表示一个字符，其中xxxx表示字符的 Unicode 码点。
+	function demo1(){
+		var a = "\u0062";
+		console.log(a);
+	}
+
+// 但是，这种表示法只限于码点在\u0000~\uFFFF之间的字符。超出这个范围的字符，必须用两个双字节的形式表示。
+	function demo2(){
+		var a = "\uD842\uDFB7";
+		console.log(a);
+	}
+
+	function demo3(){
+		var s = "𠮷";
+		console.log(s.length);
+		console.log(s.charAt(0));
+		console.log(s.charAt(1));
+		console.log(s.charCodeAt(0));
+		console.log(s.charCodeAt(1));
+	}
+
+	function demo4(){
+		var demo = {
+			toString : function(){
+				return "this si toString method"
+			},
+			a: "a"
+		};	
+		console.log(`our demo is ${demo}`);
+	}
+
+	function demo5(){
+		var fun = function(...values){
+			if(values){
+				for (value in values){
+					console.log(values[value]);
+				}
+			}
+		}
+
+		var a = "nihao";
+		fun`hello world ${a}`;
+	}
+	demo5();
+</script>
+</head>
+<body>
+</body>
+</html>

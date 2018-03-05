@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>es6 Proxy</title>
+
+	<script type="text/javascript">
+		var obj = {
+			Say : function() {
+				console.log("hello");
+			}
+		};
+
+		var proxy = new Proxy(obj, {
+			get : function(target, key, receiver){
+				console.log("this is proxy");
+				// Reflect.Say();
+				return 35;
+			},
+			apply: function () {
+			    return 'I am the proxy';
+			  }
+		});
+
+		obj.Say();
+	</script>
+</head>
+<body>
+
+</body>
+</html>
