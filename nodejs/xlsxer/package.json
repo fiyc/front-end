@@ -1,0 +1,17 @@
+{
+  "name": "xlsxer",
+  "version": "1.0.0",
+  "description": "xlsx文件导出工具",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "xlsx"
+  ],
+  "author": "fiyc",
+  "license": "ISC",
+  "dependencies": {
+    "xlsx": "^0.12.5"
+  }
+}
