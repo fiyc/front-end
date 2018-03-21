@@ -1,0 +1,111 @@
+<html>
+
+<head>
+	<title>文件拖拽</title>
+	<script type="text/javascript" src="../CommonResource/jquery-1.12.0.min.js"></script>
+	<style>
+		.file-content {
+			width: 80%;
+			margin: auto;
+			padding: auto;
+			height: 300px;
+			text-align: center;
+			font-size: 48px;
+			line-height: 300px;
+			border: 3px dashed silver;
+			/* color: silver; */
+		}
+
+		.dragenter{
+			color: white;
+			background-color: #CCCCCC;
+		}
+
+		.dragleave{
+			color: silver;
+			background-color: white;
+		}
+	</style>
+</head>
+
+<body>
+	<button id="choose-file">选择文件</button>
+	<div id="upload-region" class="file-content dragleave">
+		拖拽文件至此
+	</div>
+	<form id="file-form">
+		<input type="file" id="fileinput" hidden/>
+	</form>
+</body>
+<script>
+	var files = [];
+	var defaultEventOperation = {
+		dragleave: function (e) {    //拖离 
+			e.preventDefault();
+		},
+		drop: function (e) {  //拖后放 
+			e.preventDefault();
+		},
+		dragenter: function (e) {    //拖进 
+			e.preventDefault();
+		},
+		dragover: function (e) {    //拖来拖去 
+			e.preventDefault();
+		}
+	};
+
+
+	$(function () {
+		//取消浏览器默认事件
+		$(document).on(defaultEventOperation);
+
+		var box = document.getElementById("upload-region");
+		box.addEventListener('drop', function (e) {
+			e.preventDefault();
+			$(box).addClass('dragleave');
+			$(box).removeClass('dragenter');
+
+			box.innerHTML = '拖拽文件至此';
+			var fileList = e.dataTransfer.files;
+
+			if (fileList && fileList.length > 0) {
+				console.log(fileList[0].name);
+				files.push(fileList[0].name);
+				// document.getElementById("fileinput").files = fileList;
+			}
+		});
+
+		box.addEventListener('dragenter', function (e) {
+			e.preventDefault();
+			console.log('dragenter 触发');
+			// box.style.backgroundColor = '#CCCCCC';
+			box.innerHTML = '释放鼠标上传文件';
+			$(box).removeClass('dragleave');
+			$(box).addClass('dragenter');
+		});
+
+		box.addEventListener('dragleave', function (e) {
+			console.log('dragend 触发');
+			box.innerHTML = '拖拽文件至此';
+			$(box).addClass('dragleave');
+			$(box).removeClass('dragenter');
+		});
+
+
+		$("#fileinput").on('change', function () {
+			console.log('fileinput change..');
+			var fileinput = document.getElementById('fileinput');
+			if(fileinput.files.length > 0){
+				files.push(fileinput.files[0].name);
+			}
+			document.getElementById('file-form').reset();
+		});
+
+		$("#choose-file").on('click', function(){
+			$("#fileinput").trigger('click');	
+		});
+
+	});
+</script>
+
+</html>
