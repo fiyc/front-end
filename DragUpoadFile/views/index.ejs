@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrap3/css/bootstrap.min.css' />
+    <script src="/javascripts/jquery-3.3.1.min.js" ></script>
+    <script src="/javascripts/jquery-form.js" ></script>
+    <script src="/javascripts/download.js" /></script> 
+  </head>
+  <body>
+
+    <!-- <form id="upload_form" action="/upload" method="POST" enctype="multipart/form-data">
+      <input name="fff" type="file"/>
+      <button type="button" id="upload_btn" type="submit">上传</button>
+    </form> -->
+    <form id="sing-file-form" method="POST" enctype="multipart/form-data" hidden>
+      <input id="singleFile" type="file" /> 
+    </form>
+    <div class="btnContent">
+      <button class="btn btn-info" id="choose-single">选择文件</button>
+      <button class="btn btn-success" id="download-btn">下载sql</button>
+    </div>
+
+    <div id="dragContent" class="dragContent dragleave">拖拽文件至此</div>
+
+    <div id="fileTags" class="fileTags">
+        <!-- <div class="tag"><span class="glyphicon glyphicon-tags" ></span>123</div>
+        <div class="tag"><span class="glyphicon glyphicon-tags" ></span>123</div>
+        <div class="tag"><span class="glyphicon glyphicon-tags" ></span>123</div>
+        <div class="tag"><span class="glyphicon glyphicon-tags" ></span>123</div>
+        <div class="tag"><span class="glyphicon glyphicon-tags" ></span>123</div>
+        <div class="tag"><span class="glyphicon glyphicon-tags" ></span>123</div> -->
+    </div>
+  </body>
+</html>
