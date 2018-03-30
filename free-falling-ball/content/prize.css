@@ -1,5 +1,5 @@
 body{
-	background-image:url('../Resources/background.png')
+	background-image:url('../resources/background.png')
 }
 
 #content{
@@ -8,7 +8,7 @@ body{
 }
 
 .animationPart{
-	background-image:url('../Resources/background.png')
+	background-image:url('../resources/background.png')
 }
 
 .glassCover{
@@ -18,7 +18,7 @@ body{
 }
 
 .footer{
-	background-image:url('../Resources/di.png');
+	background-image:url('../resources/di.png');
 	width: 1025px; 
 	height: 337px;
 }
