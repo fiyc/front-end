@@ -5,10 +5,10 @@ js里的单例模式这里理解下来就是一个对象
 */
 
 var Ming = {
-    g: function(id){
+    g: function (id) {
         return document.getElementById(id);
     },
-    css: function(id, key, value){
+    css: function (id, key, value) {
         this.g(id).style[key] = value;
     }
 }
@@ -18,7 +18,7 @@ var Ming = {
 实现静态变量
 */
 
-var conf = (function(){
+var conf = (function () {
     var staticValue = {
         MAX_NUM: 100,
         MIN_NUM: 1,
@@ -26,7 +26,7 @@ var conf = (function(){
     }
 
     return {
-        get: function(name){
+        get: function (name) {
             return staticValue[name];
         }
     }
@@ -35,20 +35,20 @@ var conf = (function(){
 /*
 惰性单例
 */
-var Lazysingle = (function(){
+var Lazysingle = (function () {
     //单例实例引用
     var _instance = null;
 
-    function single(){
+    function single() {
         return {
-            publicMethod: function(){},
+            publicMethod: function () { },
             publicProperty: 1.0
         }
     }
 
     //获取单例对象接口
-    return function(){
-        if(!_instance){
+    return function () {
+        if (!_instance) {
             _instance = single();
         }
 

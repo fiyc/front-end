@@ -16,14 +16,14 @@ var a = {};
 A.call(a);
 
 */
-var Book = function(id, bookname, price){
-		this.id = id;
-		this.bookname = bookname;
-		this.price = price;
+var Book = function (id, bookname, price) {
+	this.id = id;
+	this.bookname = bookname;
+	this.price = price;
 }
 
-Book.prototype.display = function(){
-		console.log(`bookid: ${this.id}, bookname: ${this.bookname}, price: ${this.price}`);
+Book.prototype.display = function () {
+	console.log(`bookid: ${this.id}, bookname: ${this.bookname}, price: ${this.price}`);
 };
 
 /*
@@ -58,27 +58,27 @@ console.log(Book.prototype.constructor.prototype.constructor === Book);
 共有属性与共有方法
 */
 
-var Book = function(id, name, price){
-		var num = 1;
+var Book = function (id, name, price) {
+	var num = 1;
 
-		function checkId(){}
+	function checkId() { }
 
-		this.getName = function(){}
-		this.getPrice = function(){}
-		this.setName = function(){}
-		this.setPrice = function(){}
-		this.id = id;
-		this.copy = function(){}
-		this.setName(name);
-		this.setPrice(price);
+	this.getName = function () { }
+	this.getPrice = function () { }
+	this.setName = function () { }
+	this.setPrice = function () { }
+	this.id = id;
+	this.copy = function () { }
+	this.setName(name);
+	this.setPrice(price);
 }
 
 /*
 类静态共有属性和方法, 对象不能访问
 */
 Book.isChinese = true;
-Book.resetTime = function(){
-		console.log('new time');
+Book.resetTime = function () {
+	console.log('new time');
 }
 
 
@@ -86,44 +86,44 @@ Book.resetTime = function(){
 通过闭包来实现类的静态变量
 */
 
-var Book = (function(){
-		//静态私有变量
-		var bookNum = 0;
+var Book = (function () {
+	//静态私有变量
+	var bookNum = 0;
 
-		//静态私有方法
-		function checkBook(name){
-				
+	//静态私有方法
+	function checkBook(name) {
+
+	}
+
+	//返回构造函数
+	return function (newId, newName, newPrice) {
+		//私有变量
+		var name, price;
+
+		//私有方法
+		function checkID(id) { }
+
+		this.getName = function () { };
+		this.getPrice = function () { };
+		this.setName = function () { };
+		this.setPrice = function () { };
+
+		this.id = newId;
+		this.copy = function () { };
+		bookNum++;
+
+		if (bookNum > 100) {
+			throw new Error('我们仅出版100本书');
 		}
 
-		//返回构造函数
-		return function(newId, newName, newPrice){
-				//私有变量
-				var name, price;
-
-				//私有方法
-				function checkID(id){}
-
-				this.getName = function(){};
-				this.getPrice = function(){};
-				this.setName = function(){};
-				this.setPrice = function(){};
-
-				this.id = newId;
-				this.copy = function(){};
-				bookNum++;
-
-				if(bookNum > 100){
-						throw new Error('我们仅出版100本书');
-				}
-
-				this.setName(name);
-				this.setPrice(price);
-		}
+		this.setName(name);
+		this.setPrice(price);
+	}
 })();
 
 Book.prototype = {
-		isJSBook : false,
-		display: function(){}
+	isJSBook: false,
+	display: function () { }
 }
 
 
@@ -131,12 +131,12 @@ Book.prototype = {
 2.2.4 创建对象的安全模式
 */
 
-var Book = function(title, time, type){
-		if(this instanceof Book){
-				this.title = title;
-				this.time = time;
-				this.type = type;
-		}else{
-				return new Book(title, time, type);
-		}
+var Book = function (title, time, type) {
+	if (this instanceof Book) {
+		this.title = title;
+		this.time = time;
+		this.type = type;
+	} else {
+		return new Book(title, time, type);
+	}
 }

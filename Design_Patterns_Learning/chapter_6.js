@@ -5,64 +5,64 @@
 */
 
 //创建一个人类
-var Human = function(param){
-		this.skill = param && param.skill || '保密';
-		this.hobby = param && param.hobby || '保密';
+var Human = function (param) {
+	this.skill = param && param.skill || '保密';
+	this.hobby = param && param.hobby || '保密';
 }
 
 Human.prototype = {
-		getSkill: function(){
-				return this.skill;
-		},
-		getHobby: function(){
-				return this.hobby;
-		}
+	getSkill: function () {
+		return this.skill;
+	},
+	getHobby: function () {
+		return this.hobby;
+	}
 }
 
 //创建姓名类
-var Name = function(name){
-		var that = this;
+var Name = function (name) {
+	var that = this;
 
-		(function(name, that){
-				that.wholeName = name;
-				if(name.indexOf(' ') > -1){
-						that.FirstName = name.slice(0, name.indexOf(' '));
-						that.secondName = name.slice(name.indexOf(' '));
-				}
-		})(name, that);
+	(function (name, that) {
+		that.wholeName = name;
+		if (name.indexOf(' ') > -1) {
+			that.FirstName = name.slice(0, name.indexOf(' '));
+			that.secondName = name.slice(name.indexOf(' '));
+		}
+	})(name, that);
 }
 
 //创建职位类
-var Work = function(work){
-		var that = this;
-		(function(work, that){
-				switch(work){
-				case 'code':
-						that.wrok = '工程师';
-						that.workDesc = '每天沉醉于编程'
-						break;
-				case 'UI':
-						break;
-				case 'UE':
-						break;
-				}
-		})(work, that);
+var Work = function (work) {
+	var that = this;
+	(function (work, that) {
+		switch (work) {
+			case 'code':
+				that.wrok = '工程师';
+				that.workDesc = '每天沉醉于编程'
+				break;
+			case 'UI':
+				break;
+			case 'UE':
+				break;
+		}
+	})(work, that);
 }
 
-Work.prototype.changeWork = function(work){
-		this.wrok = work;
+Work.prototype.changeWork = function (work) {
+	this.wrok = work;
 }
 
-Work.prototype.changeDesc = function(desc){
-		this.workDesc = desc;
+Work.prototype.changeDesc = function (desc) {
+	this.workDesc = desc;
 }
 
 //使用
-var Person = function(name, work){
-		var _person = new Human();
-		_person.name = new Name(name);
-		_person.work = new Work(work);
-		return _person;
+var Person = function (name, work) {
+	var _person = new Human();
+	_person.name = new Name(name);
+	_person.work = new Work(work);
+	return _person;
 }
 
 

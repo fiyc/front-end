@@ -15,7 +15,7 @@
 我认为这是种很有用的技巧, 在自己写的框架提供扩展项时, 可以控制调用者配置的有效性
 */
 
-function dosomeThing(obj){
+function dosomeThing(obj) {
     var _adapter = {
         name: 'fiyc',
         title: '适配器模式',
@@ -36,7 +36,7 @@ function dosomeThing(obj){
 
 var arr = ['Javascript', 'book', '前端', '08.01'];
 
-function arrtoObjectAdapter(arr){
+function arrtoObjectAdapter(arr) {
     return {
         name: arr[0],
         type: arr[1],

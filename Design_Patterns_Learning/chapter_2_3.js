@@ -4,25 +4,25 @@
 */
 
 //父类
-function superclass(){
-		this.superValue = true;
+function superclass() {
+	this.superValue = true;
 }
 
-superclass.prototype.getsuperValue = function(){
-		return this.superValue;
+superclass.prototype.getsuperValue = function () {
+	return this.superValue;
 }
 
 //子类
-function subclass(){
-		this.subValue = false;
+function subclass() {
+	this.subValue = false;
 }
 
 //继承父类
 subclass.prototype = new superclass();
 
 //为子类添加共有方法
-subclass.prototype.getsubValue = function(){
-		return this.subValue;
+subclass.prototype.getsubValue = function () {
+	return this.subValue;
 }
 
 var instance = new subclass();
@@ -47,11 +47,11 @@ console.log(subclass.prototype instanceof superclass);
 下面的代码说明了问题1
 */
 
-function father(){
-		this.books = ['Javascript', 'html', 'css'];
+function father() {
+	this.books = ['Javascript', 'html', 'css'];
 }
 
-function child(){}
+function child() { }
 
 child.prototype = new father();
 
@@ -69,17 +69,17 @@ console.log(c1.books);
 但是这种继承方式存在一个问题, 即子类无法调用父类prototype中定义的方法
 */
 
-var superclass = function(id){
-		this.books = ['Javascript', 'html', 'css'];
-		this.id = id;
+var superclass = function (id) {
+	this.books = ['Javascript', 'html', 'css'];
+	this.id = id;
 }
 
-superclass.prototype.showBooks = function(){
-		console.log(this.books);
+superclass.prototype.showBooks = function () {
+	console.log(this.books);
 }
 
-var subclass = function(id){
-		superclass.call(this, id);
+var subclass = function (id) {
+	superclass.call(this, id);
 }
 
 var instance1 = new subclass(10);
@@ -96,25 +96,25 @@ console.log(instance1.books);
 
 缺点: 调用了2次父类的构造方法
 */
-var superclass = function(name){
-		this.name = name;
-		this.books = ['Javascript', 'html', 'css'];
+var superclass = function (name) {
+	this.name = name;
+	this.books = ['Javascript', 'html', 'css'];
 }
 
-superclass.prototype.getName = function(){
-		console.log(this.books);
-		console.log(this.name);
+superclass.prototype.getName = function () {
+	console.log(this.books);
+	console.log(this.name);
 }
 
-var subclass = function(name, time){
-		superclass.call(this, name);
+var subclass = function (name, time) {
+	superclass.call(this, name);
 
-		this.time = time;
+	this.time = time;
 }
 
 subclass.prototype = new superclass();
-subclass.prototype.getTime = function(){
-		console.log(this.time);
+subclass.prototype.getTime = function () {
+	console.log(this.time);
 }
 
 var in1 = new subclass('fiyc', '123');
@@ -129,13 +129,13 @@ in1.getName();
 
 这种方式说白了只是类式继承的一种封装, 所以类式继承存在的问题它同样会存在
 */
-function inheritobject(o){
-		//声明一个过渡函数对象
-		function F(){}
+function inheritobject(o) {
+	//声明一个过渡函数对象
+	function F() { }
 
-		F.prototype = o;
+	F.prototype = o;
 
-		return new F();
+	return new F();
 }
 
 /*
@@ -144,20 +144,20 @@ function inheritobject(o){
 
 //声明基对象
 var book = {
-		name: 'js book',
-		alikeBook: ['css book', 'html book']
+	name: 'js book',
+	alikeBook: ['css book', 'html book']
 }
 
-function createBook(obj){
-		//通过原型继承方式创建新对象(类式继承)
-		var o = inheritobject(obj);
+function createBook(obj) {
+	//通过原型继承方式创建新对象(类式继承)
+	var o = inheritobject(obj);
 
-		o.getName = function(){
-				console.log(name);
-		};
+	o.getName = function () {
+		console.log(name);
+	};
 
-		//返回拓展后的新对象
-		return o;
+	//返回拓展后的新对象
+	return o;
 }
 
 /*
@@ -165,41 +165,41 @@ function createBook(obj){
 */
 //传递参数subclass 子类
 //传递参数superclass 父类
-function inheritPrototype(subclass, superclass){
-		//复制一份父类的原型副本保存在变量中
-		var p = inheritobject(superclass.prototype);
+function inheritPrototype(subclass, superclass) {
+	//复制一份父类的原型副本保存在变量中
+	var p = inheritobject(superclass.prototype);
 
-		//修正因为重写子类原型导致子类的constructor属性被修改
-		p.constructor = subclass;
-		subclass.prototype = p;
+	//修正因为重写子类原型导致子类的constructor属性被修改
+	p.constructor = subclass;
+	subclass.prototype = p;
 }
 
 /*
 2.4 多继承 
 */
 
-var extend = function(target, source){
-		for(var property in source){
-				target[property] = source[property];
-		}
+var extend = function (target, source) {
+	for (var property in source) {
+		target[property] = source[property];
+	}
 
-		return target;
+	return target;
 }
 
 //多继承 属性赋值
-var mix = function(){
-		var i = 1;
-		var len = arguments.length;
+var mix = function () {
+	var i = 1;
+	var len = arguments.length;
 
-		var target = arguments[0];
-		var arg;
+	var target = arguments[0];
+	var arg;
 
-		for(; i<len; i++){
-				arg = arguments[i];
-				target = extend(target, arg);
-		}
+	for (; i < len; i++) {
+		arg = arguments[i];
+		target = extend(target, arg);
+	}
 
-		return target
+	return target
 }
 
 
