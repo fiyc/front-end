@@ -5,7 +5,7 @@
 var checkobject = {
 		checkName : function(){},
 		checkEmail: function(){},
-		checkPassword: function{}
+		checkPassword: function(){}
 }
 
 checkobject.checkEmail();
