@@ -1,0 +1,103 @@
+<html>
+
+<head>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+            position: relative;
+        }
+
+        #message-content {
+            width: 80%;
+            margin: 10px auto;
+            height: 600px;
+            border: 1px solid black;
+            overflow-y:auto;
+        }
+
+        #input-content {
+            left: 10%;
+            position: absolute;
+            bottom: 10px;
+            width: 80%;
+            border: 1px solid black;
+            min-height: 50px;
+        }
+
+        #input-content textarea {
+            width: 100%;
+            min-height: 50px;
+            border: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="message-content">
+
+    </div>
+    <div id="input-content">
+        <textarea id="send-message"></textarea>
+        <!-- <button onclick="send()">send</button> -->
+    </div>
+    <script>
+        var ctrldown = false;
+        document.getElementById('send-message').addEventListener('keydown', function(e){
+            var keycode = e.which || e.keyCode;
+            if(keycode === 17){
+                ctrldown = true;
+                console.log('ctri down');
+            }else{
+                if(keycode === 13 && ctrldown){
+                    send();
+                }
+            }
+        });
+
+
+        document.getElementById('send-message').addEventListener('keyup', function(e){
+            var keycode = e.which || e.keyCode;
+            if(keycode === 17){
+                ctrldown = false;
+                console.log('ctri up');
+            }
+        });
+
+        var ws = new WebSocket('ws://127.0.0.1:8080')
+        ws.onopen = function (evt) {
+            console.log("Connection open ...");
+            ws.send("Hello WebSockets!");
+        };
+
+        ws.onmessage = function (evt) {
+            pushMessage(`服务器说: ${evt.data}`);
+        };
+
+        ws.onclose = function (evt) {
+            console.log("Connection closed.");
+        };     
+        
+        var pushMessage = function(message){
+            var content = document.getElementById('message-content');
+            var contentValue = content.innerHTML;
+            content.innerHTML = contentValue + '<br>' + message; 
+        }
+
+        var send = function(){
+            var message = document.getElementById('send-message').value;
+            pushMessage(`我说: ${message}`);
+            ws.send(message);
+            document.getElementById('send-message').value = '';
+        }
+
+        
+        
+
+    </script>
+</body>
+
+</html>
