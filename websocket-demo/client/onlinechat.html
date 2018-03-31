@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <title>在线聊天室</title>
+    <!-- <author>fiyc</author> -->
+    <!-- <description>一个websocket实现的在线聊天室demo</description> -->
+    <link href="resources/style.css" type="text/css" rel="stylesheet"></link>
+    <script type="text/javascript" src="resources/jquery-1.9.1.min.js" ></script>
+    <script type="text/javascript" src="resources/script.js" ></script>
+</head>
+
+<body>
+    <div id="login-part" class="login">
+        <input id="login-name" type="text" placeholder="输入你的名字吧~"/>
+        <span id="login-msg"></span>
+        <button id="login-btn">登录</button>
+    </div>
+    <div id="chat-body" class="chat" style="display:none">
+        <div>
+            <div class="chat-show">
+                <button id="cancel-btn">x</button>
+                <div style="clear:both"></div>
+                <div id="msg-body" class="chat-show-body">
+                    <!-- <div class="each-msg my">
+                        <div class="user">我</div>
+                        <div class="msg-content">
+                            <div class="cor"></div>
+                            你好啊</div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div class="each-msg other">
+                            <div class="user">我</div>
+                            <div class="msg-content">
+                                <div class="cor"></div>
+                                你好啊</div>
+                        </div> -->
+                </div>
+            </div>
+            <div class="chat-input">
+                <div id="msg-input" class="chat-input-content focus">
+                    <textarea id="msg"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

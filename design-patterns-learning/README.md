@@ -11,3 +11,4 @@
 * chapter_7.js  原型模式
 * chapter_8.js  单例模式    
 * chapter_9.js  外观模式
+* chapter_10.js 适配器模式

@@ -12,14 +12,29 @@ var resposnes = [
 
 var ws = new WebSocket.Server({port: 8080});
 
-ws.on('connection', function(ws){
-    ws.on('message', function(msg){
-        console.log(ws.clients);
+var clients = {};
+
+ws.on('connection', function(client){
+    var name = client.protocol;
+    if(clients[name]){
+        client.send('已经有人用了这个名字了哦, 换一个试试吧~');
+        client.close();
+    }else{
+        clients[name] = client;
+        client.send('OK');
+    }
+
+    client.on('message', function(msg){
         var index = parseInt(Math.random() * resposnes.length);
-        ws.send(resposnes[index]);
+        for(var key in clients){
+            clients[key].send(`${name}||${msg}`);
+        }
     })
 
-    ws.send('hello');
+    client.on('close', function(){
+        clients[name] = undefined;
+    });
 });
+
 
 

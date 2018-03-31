@@ -42,7 +42,6 @@
     </div>
     <div id="input-content">
         <textarea id="send-message"></textarea>
-        <!-- <button onclick="send()">send</button> -->
     </div>
     <script>
         var ctrldown = false;
@@ -67,7 +66,7 @@
             }
         });
 
-        var ws = new WebSocket('ws://127.0.0.1:8080')
+        var ws = new WebSocket('ws://127.0.0.1:8080', 'fiyc')
         ws.onopen = function (evt) {
             console.log("Connection open ...");
             ws.send("Hello WebSockets!");
@@ -92,6 +91,10 @@
             pushMessage(`我说: ${message}`);
             ws.send(message);
             document.getElementById('send-message').value = '';
+        }
+
+        var close = function(){
+            ws.close();
         }
 
         
