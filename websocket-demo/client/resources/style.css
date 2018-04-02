@@ -30,7 +30,7 @@
     display: block;
     border-radius: 4px;
     border: 1px solid #BCBCBC;
-    background-color: aquamarine;
+    background-color: #62b900;
     margin: 30px auto;
     cursor: pointer;
 }
@@ -77,6 +77,7 @@
     height: 400px;
     /* border: 1px solid rgba(0, 0, 0, 0.1); */
     border-radius: 4px;
+    overflow-y:auto;
 }
 
 .each-msg{
@@ -148,6 +149,13 @@
     height: 0px;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.system-msg{
+    /* border: 1px solid black; */
+    font-size: 10px;
+    text-align: center;
+    color: rgba(17, 17, 17, 0.308);
 }
 
 .chat-input{

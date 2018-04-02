@@ -1,35 +1,66 @@
 /**
  * WebSocket功能模块
  */
-var socketHander = function (name, successfn, errorfn, onMsg) {
+var socketHander = function (name, successfn, errorfn, onMsg, onSysMsg) {
     var isLogin = false;
-    var ws = new WebSocket('ws://127.0.0.1:8080', name);
+    var ws = new WebSocket('ws://172.28.101.127:8080');
 
     ws.onmessage = function (evt) {
-        var res = evt.data;
-        if (!isLogin) {
-            if (res === 'OK') {
-                successfn(res);
-                isLogin = true;
-            } else {
-                errorfn(res);
-                isLogin = false;
-            }
-        } else {
-            var resplit = res.split('||');
-            var username = resplit[0];
-            var msg = resplit[1];
-            onMsg(username, msg);
+        var res = JSON.parse(evt.data);
+
+        switch (res.resCode) {
+            case 3:
+                var data = {
+                    reqCode: 1,
+                    data: { name: name }
+                };
+                ws.send(JSON.stringify(data));
+                break;
+            case 4:
+                if (res.data.success) {
+                    successfn(res.msg);
+                } else {
+                    errorfn(res.msg);
+                }
+                break;
+            case 5:
+                console.log(res.data.username);
+                onSysMsg(res.data);
+                break;
+            case 6:
+                onMsg(res.data);
+            case 7:
+                break;
+
         }
+
+        // if (!isLogin && res.resCode === 3) {
+        //     if (res === 'OK') {
+        //         successfn(res);
+        //         isLogin = true;
+        //     } else {
+        //         errorfn(res);
+        //         isLogin = false;
+        //     }
+        // } else {
+        //     var resplit = res.split('||');
+        //     var username = resplit[0];
+        //     var msg = resplit[1];
+        //     onMsg(username, msg);
+        // }
     };
 
     return {
-        name : name,
-        close : function () {
+        name: name,
+        close: function () {
             ws.close();
         },
-        send : function (msg) {
-            ws.send(msg);
+        send: function (msg) {
+            var data = {
+                reqCode: 2,
+                data: { msg: msg }
+            };
+            ws.send(JSON.stringify(data));
         }
     };
 }
@@ -58,14 +89,10 @@ $(function () {
             function (res) {
                 $("#login-msg").html(res);
             },
-            function (name, msg) {
-
-                var msgfrom = '';
-                if (name === ws.name) {
-                    msgfrom = 'my';
-                } else {
-                    msgfrom = 'other';
-                }
+            function (data) {
+                var name = data.from;
+                var msg = data.content;
+                var msgfrom = data.isself ? 'my' : 'other';
 
                 var msgContent = `<div class="each-msg ${msgfrom}">
                                     <div class="user">${name}</div>
@@ -77,21 +104,29 @@ $(function () {
                                 <div style="clear:both">`;
 
                 $("#msg-body").append(msgContent);
+            },
+            function (data) {
+                var name = data.username;
+                var msgContent = `<div class="system-msg">${name} 加入聊天室</div>
+                                  <div style="clear:both"></div>`;
+                
+                $("#msg-body").append(msgContent);
+
             });
 
     });
 
     $("#cancel-btn").click(function () {
         ws.close();
-        $("#login-part").css('display', 'display');
-        $("#chat").css('display', 'none');
+        $("#login-part").css('display', 'block');
+        $("#chat-body").css('display', 'none');
     });
 
-    $("#msg").focus(function(){
+    $("#msg").focus(function () {
         $("#msg-input").addClass("focus");
     });
 
-    $("#msg").focusout(function(){
+    $("#msg").focusout(function () {
         $("#msg-input").removeClass("focus");
     });
 
