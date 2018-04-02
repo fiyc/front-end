@@ -18,7 +18,7 @@ var socketHander = function (name, successfn, errorfn, onMsg, onSysMsg) {
                 break;
             case 4:
                 if (res.data.success) {
-                    successfn(res.msg);
+                    successfn(res);
                 } else {
                     errorfn(res.msg);
                 }
@@ -83,8 +83,19 @@ $(function () {
         }
 
         ws = socketHander(name, function (res) {
+            debugger;
             $("#login-part").css('display', 'none');
             $("#chat-body").css('display', 'block');
+            $("#side-part").css('display', 'block');
+
+            var allUser = res.data.currentuser;
+                $("#current-user-num").html(allUser.length);
+                var userList = '';
+                for(var i=0; i<allUser.length;i++){
+                    userList += `<div class="each-side-user">${allUser[i]}</div>`;
+                }
+
+                $("#current-user").html(userList);
         },
             function (res) {
                 $("#login-msg").html(res);
@@ -106,12 +117,21 @@ $(function () {
                 $("#msg-body").append(msgContent);
             },
             function (data) {
+                var leaveOrJoin = data.type === 1 ? '加入' : '离开';
                 var name = data.username;
-                var msgContent = `<div class="system-msg">${name} 加入聊天室</div>
+                var msgContent = `<div class="system-msg">${name} ${leaveOrJoin}聊天室</div>
                                   <div style="clear:both"></div>`;
                 
                 $("#msg-body").append(msgContent);
 
+                var allUser = data.currentuser;
+                $("#current-user-num").html(allUser.length);
+                var userList = '';
+                for(var i=0; i<allUser.length;i++){
+                    userList += `<div class="each-side-user">${allUser[i]}</div>`;
+                }
+
+                $("#current-user").html(userList);
             });
 
     });
@@ -120,6 +140,7 @@ $(function () {
         ws.close();
         $("#login-part").css('display', 'block');
         $("#chat-body").css('display', 'none');
+        $("#side-part").css('display', 'none');
     });
 
     $("#msg").focus(function () {

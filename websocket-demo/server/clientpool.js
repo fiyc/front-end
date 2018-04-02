@@ -20,5 +20,14 @@ module.exports = {
                 fn(clients[id]);
             }
         }
+    },
+    allClients: function(){
+        var reuslt = [];
+        for(var name in clients){
+            if(clients[name]){
+                reuslt.push(name);
+            }
+        }
+        return reuslt;
     }
 };

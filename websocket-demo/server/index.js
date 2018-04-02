@@ -1,5 +1,5 @@
 const WebSocket = require('ws');
-var ws = new WebSocket.Server({port: 8080});
+var ws = new WebSocket.Server({ port: 8080 });
 var clients = require('./clientpool');
 var hander = require('./signalhander');
 
@@ -7,53 +7,56 @@ var hander = require('./signalhander');
 
 
 
-ws.on('connection', function(client){
+ws.on('connection', function (client) {
     client.isLogin = false;
 
     var loginres = hander.nologinres();
     client.send(loginres);
 
-    client.on('message', function(msg){
+    client.on('message', function (msg) {
         var reqObj = hander.analysisRequest(msg);
-        if(!reqObj){
+        if (!reqObj) {
             var invalidReq = hander.errorres('无效的请求');
             client.send(invalidReq);
             return;
         }
 
-        if(!client.isLogin && reqObj.reqCode != hander.codeEnum.REQ_LOGIN){
+        if (!client.isLogin && reqObj.reqCode != hander.codeEnum.REQ_LOGIN) {
             var invalidReq = hander.errorres('未登录');
             client.send(invalidReq);
             return;
         }
 
-        if(client.isLogin && reqObj.reqCode === hander.codeEnum.REQ_LOGIN){
+        if (client.isLogin && reqObj.reqCode === hander.codeEnum.REQ_LOGIN) {
             var invalidReq = hander.errorres('无法重复登录');
             client.send(invalidReq);
             return;
         }
 
-        if(reqObj.reqCode === hander.codeEnum.REQ_LOGIN){
+        if (reqObj.reqCode === hander.codeEnum.REQ_LOGIN) {
             var name = reqObj.data.name;
             var resMsg = '';
-            if(clients.exit(name)){
+            if (clients.exit(name)) {
                 resMsg = hander.loginres(
                     '用户名已存在',
-                    {success: false}
+                    { success: false }
                 );
-            }else{
-                var newchater = hander.newchater(name);
-                clients.broadcast(function(c){
-                    c.send(newchater);
-                });
-
+            } else {
                 client.name = name;
                 client.isLogin = true;
                 clients.push(name, client);
                 resMsg = hander.loginres(
                     '登录成功',
-                    {success: true}
+                    { 
+                        success: true,
+                        currentuser: clients.allClients() 
+                    }
                 );
+
+                var newchater = hander.newchater(name, clients.allClients());
+                clients.broadcast(function (c) {
+                    c.send(newchater);
+                });
             }
 
             client.send(resMsg);
@@ -64,19 +67,24 @@ ws.on('connection', function(client){
             date: new Date(),
             from: client.name,
             content: reqObj.data.msg,
-            isself : false
+            isself: false
         };
-        clients.broadcast(function(c){
+        clients.broadcast(function (c) {
             resData.isself = c.name === client.name;
             var res = hander.broadres(resData);
             c.send(res);
         });
     });
 
-    client.on('close', function(){
-        if(client.name){
+    client.on('close', function () {
+        if (client.name) {
             clients.remove(client.name);
         }
+
+        var newchater = hander.chaterleave(client.name, clients.allClients());
+        clients.broadcast(function (c) {
+            c.send(newchater);
+        });
     });
 
 

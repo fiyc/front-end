@@ -62,11 +62,26 @@ module.exports = {
             undefined
         ).toString();
     },
-    newchater: function(name){
+    newchater: function(name, currentuser){
         return new response(
             codeEnum.RES_NEW_CHATER,
             '有新的用户加入啦',
-            {username : name}
+            {
+                username : name, 
+                type : 1,
+                currentuser: currentuser
+            }
+        ).toString(); 
+    },
+    chaterleave: function(name, currentuser){
+        return new response(
+            codeEnum.RES_NEW_CHATER,
+            '有用户离开',
+            {
+                username : name, 
+                type : 2,
+                currentuser: currentuser
+            }
         ).toString(); 
     },
     broadres: function(data){

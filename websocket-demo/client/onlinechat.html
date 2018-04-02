@@ -5,16 +5,25 @@
     <!-- <author>fiyc</author> -->
     <!-- <description>一个websocket实现的在线聊天室demo</description> -->
     <link href="resources/style.css" type="text/css" rel="stylesheet"></link>
-    <script type="text/javascript" src="resources/jquery-1.9.1.min.js" ></script>
-    <script type="text/javascript" src="resources/script.js" ></script>
+    <script type="text/javascript" src="resources/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="resources/script.js"></script>
 </head>
 
 <body>
-    <div id="login-part" class="login" >
-        <input id="login-name" type="text" placeholder="输入你的名字吧~"/>
+    <div id="side-part" class="user-side" style="display:none">
+        <span>当前用户</span> <span id="current-user-num">10</span><span class="static-num">/10</span>
+        <hr>
+        <div id="current-user">
+        <div>123</div>
+        <div>456</div>
+        </div>
+    </div>
+    <div id="login-part" class="login">
+        <input id="login-name" type="text" placeholder="输入你的名字吧~" />
         <span id="login-msg"></span>
         <button id="login-btn">登录</button>
     </div>
+
     <div id="chat-body" class="chat" style="display: none">
         <div>
             <div class="chat-show">
@@ -39,4 +48,5 @@
         </div>
     </div>
 </body>
+
 </html>
