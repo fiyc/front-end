@@ -41,15 +41,24 @@ ws.on('connection', function (client) {
                     '用户名已存在',
                     { success: false }
                 );
+
+                client.close();
+            } else if (clients.allClients().length >= 10) {
+                resMsg = hander.loginres(
+                    '聊天室已经爆满啦',
+                    { success: false }
+                );
+
+                client.close();
             } else {
                 client.name = name;
                 client.isLogin = true;
                 clients.push(name, client);
                 resMsg = hander.loginres(
                     '登录成功',
-                    { 
+                    {
                         success: true,
-                        currentuser: clients.allClients() 
+                        currentuser: clients.allClients()
                     }
                 );
 
@@ -79,12 +88,14 @@ ws.on('connection', function (client) {
     client.on('close', function () {
         if (client.name) {
             clients.remove(client.name);
+
+            var newchater = hander.chaterleave(client.name, clients.allClients());
+            clients.broadcast(function (c) {
+                c.send(newchater);
+            });
         }
 
-        var newchater = hander.chaterleave(client.name, clients.allClients());
-        clients.broadcast(function (c) {
-            c.send(newchater);
-        });
+
     });
 
 

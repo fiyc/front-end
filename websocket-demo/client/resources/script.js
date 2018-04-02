@@ -83,7 +83,6 @@ $(function () {
         }
 
         ws = socketHander(name, function (res) {
-            debugger;
             $("#login-part").css('display', 'none');
             $("#chat-body").css('display', 'block');
             $("#side-part").css('display', 'block');
@@ -115,6 +114,7 @@ $(function () {
                                 <div style="clear:both">`;
 
                 $("#msg-body").append(msgContent);
+                $("#msg-body").scrollTop($("#msg-body").prop("scrollHeight"));
             },
             function (data) {
                 var leaveOrJoin = data.type === 1 ? '加入' : '离开';
@@ -123,6 +123,7 @@ $(function () {
                                   <div style="clear:both"></div>`;
                 
                 $("#msg-body").append(msgContent);
+                $("#msg-body").scrollTop($("#msg-body").prop("scrollHeight"));
 
                 var allUser = data.currentuser;
                 $("#current-user-num").html(allUser.length);
