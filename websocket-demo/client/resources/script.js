@@ -3,7 +3,8 @@
  */
 var socketHander = function (name, successfn, errorfn, onMsg, onSysMsg) {
     var isLogin = false;
-    var ws = new WebSocket('ws://172.28.101.127:8080');
+    // var ws = new WebSocket('ws://172.28.101.127:8080');
+    var ws = new WebSocket('ws://127.0.0.1:8080');
 
     ws.onmessage = function (evt) {
         var res = JSON.parse(evt.data);
