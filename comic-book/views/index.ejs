@@ -3,9 +3,21 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="/javascripts/jquery-3.3.1.min.js"></script>
+  <script src="/javascripts/comic.js"></script>
+  <style>
+    * {
+      margin: 0px;
+      padding: 0px;
+    }
+
+  </style>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <div align="center">
+    <h1 id="title"></h1>
+    </div>
+    <div align="center" id="content">
+    </div>
   </body>
 </html>
