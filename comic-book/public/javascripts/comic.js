@@ -1,20 +1,20 @@
 $(function () {
-    var lastChapter = window.localStorage['last-chapter'] || 218;
-    var lasteChapterIndex = window.localStorage['last-chapter-index'] || 1;
+    var lastChapter = window.localStorage[`${bookId}_last-chapter`] || '001';
+    var lasteChapterIndex = window.localStorage[`${bookId}_last-chapter-index`] || 1;
     var commic = {};
     var chapterList = [];
 
     var loadImg = function (callback) {
         $.ajax({
-            url: '/comic?name=YRZX',
+            url: `/comic?name=${bookId}`,
             type: 'GET',
             success: function (data) {
                 if (data.statuscode === 200) {
-                    for (var key in data.body) {
+                    for (var key in data.body.data) {
                         chapterList.push(key);
                         commic[key] = [];
-                        for (var item in data.body[key]) {
-                            commic[key][Number(item)] = data.body[key][item];
+                        for (var item in data.body.data[key]) {
+                            commic[key][Number(item)] = data.body.data[key][item];
                         }
                     }
 
@@ -27,7 +27,12 @@ $(function () {
     }
 
     var pushImg = function () {
+        debugger;
         var imgArray = commic[lastChapter];
+        if(!imgArray){
+            lastChapter = chapterList[0];
+            var imgArray = commic[lastChapter];
+        }
         for (var i = 0; i < imgArray.length; i++) {
             if (!imgArray[i]) {
                 continue;
@@ -83,8 +88,8 @@ $(function () {
             fn();
         }
 
-        window.localStorage['last-chapter'] = lastChapter;
-        window.localStorage['last-chapter-index'] = lasteChapterIndex;
+        window.localStorage[`${bookId}_last-chapter`] = lastChapter;
+        window.localStorage[`${bookId}_last-chapter-index`]= lasteChapterIndex;
         updateTitle();
 
         var nextId = getCurrentImgID();

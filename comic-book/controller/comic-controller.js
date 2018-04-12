@@ -11,5 +11,9 @@ module.exports = {
         }else{
             res.json(response.error('未获取到漫画信息'));
         }
+    },
+    getBooks: function(req, res, next){
+        let comicRes = comichander.getComicNames();
+        res.json(response.data('success', comicRes));
     }
 }
