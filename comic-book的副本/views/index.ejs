@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="/javascripts/jquery-3.3.1.min.js"></script>
+  <script>
+    $.ajax({
+        url: '/books',
+        type: 'GET',
+        success: function(data){
+            if(data.statuscode === 200){
+                for(var i=0; i<data.body.length; i++){
+                    var eachBook = data.body[i];
+                    var bookHtml = `<a href="/read?id=${eachBook.id}">${eachBook.name}</a><br>`;
+                    $("body").append(bookHtml);
+                }
+            }
+        }
+    });
+  </script>
+  <style>
+    * {
+      margin: 0px;
+      padding: 0px;
+    }
+
+  </style>
+  </head>
+  <body>
+    
+  </body>
+</html>
