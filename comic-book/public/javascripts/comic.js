@@ -27,7 +27,6 @@ $(function () {
     }
 
     var pushImg = function () {
-        debugger;
         var imgArray = commic[lastChapter];
         if(!imgArray){
             lastChapter = chapterList[0];
@@ -117,11 +116,27 @@ $(function () {
     });
 
     document.onkeyup = function(event){
-        debugger;
         if(event.keyCode === 37){
             MoveIndex(-1);
         }else if(event.keyCode === 39){
             MoveIndex(1);
         }
     }
+
+    $(".left-click").click(function(){
+        MoveIndex(-1);
+    });
+
+    $(".right-click").click(function(){
+        MoveIndex(1);
+    });
+
+    $("#go").click(function(){
+        var currentId = getCurrentImgID();
+        $("#" + currentId).prop('hidden', 'hidden');
+
+        lastChapter = $("#target-chapter").val();
+        lasteChapterIndex = 1;
+        MoveIndex(0);
+    });
 });
